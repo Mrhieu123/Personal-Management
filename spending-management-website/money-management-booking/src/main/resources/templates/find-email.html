@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/otp.css}">
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 offset-md-4 form">
+
+                <form th:action="@{/find-email}" method="POST">
+                    <h3 class="text-center">Find your email</h3>
+                    <th:block th:if="${param.report != null}">
+                        <div class="alert alert-danger">
+                            <h6>No search results</h6>
+                            Your search did not return any results. Please try again with other information.
+                        </div>
+                    </th:block>
+                    <th:block th:if="${param.report == null}">
+                        <br>
+                    </th:block>
+                    <p>Please enter your email address number to search for your account.</p>
+                    <th:block th:if="${param.report == null}">
+                        <br>
+                    </th:block>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" placeholder="Enter email address"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control button" type="submit" name="check-email" value="Continue">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

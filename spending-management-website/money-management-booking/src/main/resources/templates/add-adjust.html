@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Create Adjust</title>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin: 0 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .header h1 {
+            color: #333333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .h2 small {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding-bottom: 40px;">
+    <form th:action="@{/users/add-adjust}" th:object="${user}" method="post">
+        <div class="container mt-5">
+            <div class="header text-center">
+                <h1 th:text="'What\'s Up' +' '+ *{lastName} +'!'"></h1>
+                <p>create a budget of how much you want to spend, save and earning goals. Also distribute your budget.</p>
+            </div>
+            <div class="mess">
+                <i style="color: red; margin-right: 170px;" class="mb-0" th:text="${mess}"></i>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="category">I want to spend (Monthly):</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" th:field="*{monthlySpending}" required>
+                        <div class="text-muted">
+                            <small>Per Month</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="amount">I want to spend (Annually):</label>
+                        <input type="number" class="form-control"  placeholder="Enter amount" th:field="*{annuallySpending}" required>
+                        <div class="text-muted">
+                            <small>Per Year</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="amount">I want to save (Monthly):</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" th:field="*{monthlySaving}">
+                        <div class="text-muted">
+                            <small>Per Month</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="amount">I want to earn (Monthly):</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" th:field="*{monthlyEarning}">
+                        <div class="text-muted">
+                            <small>Per Month</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary"><a style="color: #ffff;" th:href="@{/users/list-budget}">Go To Budget</a></button>
+            </div>
+
+    </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

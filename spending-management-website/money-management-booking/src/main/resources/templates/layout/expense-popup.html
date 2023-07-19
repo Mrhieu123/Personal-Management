@@ -1,0 +1,168 @@
+<!--add expense-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true"
+    th:fragment="add-expense-popup(addexpense)">
+    <form th:action="@{/users/add-expenses}" th:object="${addexpense}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Create New Expense
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"> <label class=""><b>Title</b>
+                            </label></div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter Title" type="text" class="form-control" th:field="*{title}"
+                                required>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Amount</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Input number" type="number" class="form-control" th:field="*{amount}"
+                                required name="amount" onkeypress="return validateNumberInput(event)">
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Accounts</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select th:field="*{accounts.id}" required class="form-control">
+                                <option th:each="item : ${listaccount}" th:value="${item.id}" th:text="${item.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Category</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select th:field="*{category.id}" required class="form-control">
+                                <option th:each="item : ${listcategory}" th:value="${item.id}" th:text="${item.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"><label class="">
+                                <b>Date</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="date" th:field="*{expenseDate}" id="myDate" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<!----------------------------------------------------------------------------------------->
+<!--edit-expense-->>
+
+<div class="modal fade" th:id="'editModal'+${item.id}" tabindex="-1" role="dialog"
+    th:aria-labelledby="'editModalLabel' + ${item.id}" aria-hidden="true" th:fragment="edit-expense-popup(item)">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:id="'editModalLabel'+${item.id}">
+                    Edit Expense</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input th:value="${item.id}" type="text" class="form-control" name="id" style="display: none;">
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class=""><b>Title</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input th:value="${item.title}" type="text" class="form-control" name="title">
+
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Amount</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input th:value="${item.amount}" type="text" class="form-control" name="amount">
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Accounts</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="accounts" class="form-control">
+                            <option th:each="items : ${listaccount}" th:value="${items.id}" th:text="${items.name}"
+                                th:selected="${item.accounts.id == items.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Category</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="category" class="form-control">
+                            <option th:each="items : ${listcategory}" th:value="${items.id}" th:text="${items.name}"
+                                th:selected="${item.category.id == items.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Date</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input th:value="${item.expenseDate}" type="date" class="form-control" name="expenseDate">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save
+                    Changes</button>
+            </div>
+        </div>
+    </div>
+</div>

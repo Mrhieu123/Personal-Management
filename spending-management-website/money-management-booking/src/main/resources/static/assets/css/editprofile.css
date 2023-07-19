@@ -1,0 +1,20 @@
+.account-settings-fileinput {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+#inputOTP{
+    width: 50%;
+    margin-right: 20px;
+}
+#inputEmail{
+    width: 74%;
+}
+.otp-send-box{
+    display: flex;
+    flex-wrap: wrap;
+    
+}

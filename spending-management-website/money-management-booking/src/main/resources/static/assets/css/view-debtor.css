@@ -1,0 +1,266 @@
+
+.select,
+#locale {
+    width: 100%;
+}
+
+.like {
+    margin-right: 10px;
+}
+body {
+    background-color: rgba(218, 211, 224, 0.673);
+}
+
+.container-fluid {
+    margin-top: 2%;
+
+}
+
+.card {
+
+    border: 2px solid rgba(115, 110, 110, 0.508);
+    border-radius: 25px !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.card-header {
+    border-top-right-radius: 25px !important;
+    border-top-left-radius: 25px !important;
+    background-color: rgba(210, 210, 210, 0.567)
+}
+
+.modal-lg {
+    max-width: 80%;
+}
+
+.pagination{
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    padding: 3px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-pgn-bottom{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 115.2px;
+    height: 45.2px;
+    background-color: #2374e1;
+    color: white;
+    border: 2px solid rgba(115, 110, 110, 0.508);
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.modal-content{
+    border: 2px solid rgba(115, 110, 110, 0.508);
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.form-label-horizontal {
+    text-align: right;
+}
+table {
+    table-layout: fixed;
+}
+
+table td,
+table th {
+    overflow: hidden;
+    white-space: nowrap;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 300px;
+    caret-color:red;
+    transition: width 0.5s linear;
+}
+
+.searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration: none;
+}
+
+
+/* phân trang */
+
+.negativeTotal {
+    background-color: red;
+}
+
+.green-row {
+color: green;
+}
+
+.red-row {
+    color: rgb(245, 36, 36);
+}
+
+.pagination {
+display: flex;
+justify-content: space-between;
+align-items: center;
+list-style: none;
+padding: 0;
+margin-top: 20px;
+}
+
+.pagination li {
+margin: 0 5px;
+}
+
+.pagination a,
+.pagination span {
+display: inline-block;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 4px;
+margin-top: 5px;
+border: 1px solid #ccc;
+}
+
+.pagination a:hover {
+background-color: #f2f2f2;
+}
+
+.pagination .active {
+background-color: #007bff;
+color: rgb(221, 133, 61);
+}
+
+.pagination .previous,
+.pagination .next {
+background-color: #e6dddd;
+color: #000000ce;
+}
+.btn.btn-dangers {
+background-color: #dfdada;
+color: #000000ce;
+}
+
+
+
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-container:first-child {
+    margin-left: 0;
+}
+
+.form-container:last-child {
+    margin-right: 0;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+}
+
+
+.error {
+    color: red;
+    border-color: red;
+}
+
+.separator {
+    margin: 0 5px;
+}
+
+
+
+
+
+.classifys-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+
+}
+
+.classify-option {
+    cursor: pointer;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: rgb(192, 181, 181);
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.classify-option.active {
+    background-color: rgb(55, 184, 55);
+}
+
+.container span {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: rgb(192, 181, 181);
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+td {
+    height: 45px;
+    ;
+}
+
+
+
+

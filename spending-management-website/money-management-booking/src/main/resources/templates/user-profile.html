@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::main-fragment(
+    ~{::title}, 
+    ~{::#profile-static-resource},
+    ~{::#profile_javascript},
+    ~{::#mainContent})">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <th:block id="profile-static-resource">
+        <link rel="stylesheet" th:href="@{/assets/css/editprofile.css}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+    </th:block>
+    <title>Profile</title>
+</head>
+
+<body>
+    <section id="mainContent">
+        <div class="container bootstrap snippets bootdey" style="margin-top: 10px;" >
+            <h1 class="text-primary">Edit Profile</h1>
+        
+            <hr>
+            <p style="color: red;" th:text="${param.mess}"></p>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: center;" >
+                        <img th:src="${userDTOEditProfile.avatar}" alt="Avatar" class=" rounded-circle "
+                            id="img-avatar" style="margin-bottom: 12px; " width="200" height="200">
+
+                        <form  th:action="@{/settings/upload-avatar}" method="POST" enctype="multipart/form-data" style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap;">
+                            <label class="btn btn-outline-primary" >
+                                <span>Upload new photo</span>
+                                <input type="file" data-img="img-avatar" data-max-size="5242880"
+                                    data-error-max-size="File không quá 5MB" data-max-width="256" data-max-height="256"
+                                    class="account-settings-fileinput file-upload" accept="image/*">
+
+                                <input type="hidden" name="avatar">
+                            </label> &nbsp;
+                            <div style="width: 100%; display: flex; justify-content: center;" > 
+                                <a href="" class="btn btn-default md-btn-flat " style="margin-right: 12px;">Reset</a>
+                                <button type="submit" class="btn btn-primary">Upload</button>&nbsp;
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-9 personal-info">
+                    <form th:action="@{/settings/profile}" th:object="${userDTOEditProfile}" method="POST" id="edit-profile-form">
+                        <input type="text" style="display: none;" th:field="*{id}" readonly>
+                        <h3>Personal info</h3>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">First Name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" th:field="*{firstName}" type="text" name="firstName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Last Name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" th:field="*{lastName}" type="text" name="lastName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" th:field="*{email}" readonly type="text" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Phone:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" th:field="*{phone}" type="text" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Address:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" th:field="*{address}" type="text" th:value="*{address}"
+                                    name="address">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center">
+                <input id="submit-edit-profile" type="button" value="Update" class="btn btn-primary">
+            </div>
+        </div>
+
+    </section>
+    <th:block id="profile_javascript">
+
+    <script th:src="@{/assets/javascript/editprofile.js}"></script>
+    </th:block>
+</body>
+
+</html>

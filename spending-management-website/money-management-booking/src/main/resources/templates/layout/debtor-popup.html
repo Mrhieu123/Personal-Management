@@ -1,0 +1,151 @@
+
+
+<div th:fragment="add-debtor-popup()" class="modal fade" id="addModal" tabindex="-1" role="dialog"
+aria-labelledby="addModalLabel" aria-hidden="true">
+<form th:action="@{/Debtor/Add}" th:object="${debtor}" method="post">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-popup">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Debtor</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3"> <label
+                            class=""><b>Name</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input placeholder="Enter Name" type="text"
+                            class="form-control" name="name" required>
+                        <input type="hidden" class="form-control"
+                            th:value="${debtor.userId}" th:field="*{userId}">
+                    </div>
+
+
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3"><label class="">
+                            <b>Address</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input placeholder="Enter Address" type="text"
+                            class="form-control" name="Address" required>
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Phone</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input
+                            placeholder="Enter Phone number (at least 10 numbers)"
+                            type="text" class="form-control" name="Phone"
+                            pattern="[0-9]{10,13}"
+                            title="Phone number must be between 10 and 13 digits"
+                            required>
+
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <div class="form-label-horizontal col-md-3">
+                        <label class="">
+                            <b>Email</b>
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input placeholder="Enter email" type="email"
+                            class="form-control" name="Email" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+</form>
+</div>
+<!--  -->
+
+<div th:fragment="edit-debtor-popup(item)" class="modal fade" th:id="'editModal'+${item.id}" tabindex="-1" role="dialog"
+    th:aria-labelledby="'editModalLabel' + ${item.id}" aria-hidden="true">
+    <form th:action="@{/Debtor/update}" method="post">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content rounded-popup">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="'editModalLabel'+${item.id}">Edit
+                        Debtor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Name</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter Name" type="text" class="form-control" name="name"
+                                th:value="${item.name}">
+                            <input type="hidden" class="form-control" th:value="${item.userId}" name="userId">
+                            <input type="hidden" class="form-control" th:value="${item.id}" name="id">
+                        </div>
+
+
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Address</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter Address" type="text" class="form-control" name="address"
+                                th:value="${item.address}">
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Phone</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter phone number at least 10 numbers! " type="number"
+                                class="form-control" name="phone" th:value="${item.phone}">
+
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Email</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter email" type="email" class="form-control" name="email"
+                                th:value="${item.email}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

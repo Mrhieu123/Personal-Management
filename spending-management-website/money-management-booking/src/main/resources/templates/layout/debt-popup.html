@@ -1,0 +1,181 @@
+<!--  -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true"
+    th:fragment="add-debt-popup()">
+
+    <form th:action="@{/Debtor/Detail/Add}" th:object="${debt_detail}" method="post">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content rounded-popup">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Add New Debt
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"> <label class=""><b>Account(*)</b>
+                            </label></div>
+                        <div class="col-md-9">
+                            <input type="hidden" class="form-control" th:field="*{id}" th:value="${debt_detail.id}">
+                            <input type="hidden" id="debtorId" value="${debtor.id}">
+                            <input type="hidden" class="form-control" th:field="*{deptorId}"
+                                th:value="${debt_detail.deptorId}">
+                            <select
+                                style="height: 37px; width: 180px; border-radius: 13px; border-color: rgb(123, 117, 108);"
+                                th:field="*{accounts.id}">
+                                <option th:each="item : ${listAccount}" th:value="${item.id}" th:text="${item.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"><label class=""><b>Note(*)
+                                </b></label></div>
+                        <div class="col-md-9">
+                            <textarea rows="8" placeholder="Note" class="form-control" name="note"
+                                id="noteSettlement"></textarea>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Classify(*)</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="classifys-container">
+                                <span class="classify-option" id="plus" onclick="selectOptions(true)">+</span>
+                                <span class="classify-option" id="minus" onclick="selectOptions(false)">-</span>
+                                <input type="hidden" id="classifyValue" th:field="*{classify}" name="classify" value="">
+                            </div>
+                            <div><i>(+) add a debt
+                                    to this person, (-) pay a debt or add a debt
+                                    you borrow from this person</i></div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Amount(*)</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" th:field="*{money_debt}"
+                                placeholder="Enter amount monney" min="0" th:value="${debt_detail.money_debt}"
+                                id="numberInput" oninput="convertNumber(this.value)">
+                            <div style="color: red;" id="convertedText"></div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"><label class="">
+                                <b>Date(*)</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="datetime-local" class="form-control" th:field="*{date_create}" required />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--  -->
+<div th:fragment="edit-debt-popup(item)" class="modal fade" th:id="'editModal' + ${item.id}" tabindex="-1" role="dialog"
+    th:aria-labelledby="'editModalLabel' + ${item.id}" aria-hidden="true">
+    <form th:action="@{/Debtor/Detail/Update/{id}(id=${item.id})}" method="post">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content rounded-popup">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="'editModalLabel' + ${item.id}">Edit Debt
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Account(*)</b></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="hidden" class="form-control" name="id" th:value="${debt_detail.id}">
+                            <input type="hidden" id="debtorId" value="${debtor.id}">
+                            <input type="hidden" class="form-control" name="deptorId"
+                                th:value="${debt_detail.deptorId}">
+                            <select class="form-control"
+                                style="height: 37px; width: 180px; border-radius: 13px; border-color: rgb(123, 117, 108);"
+                                name="accounts.id">
+                                <option th:each="itemss : ${listAccount}" th:value="${itemss.id}"
+                                    th:text="${itemss.name}" th:selected="${itemss.id == item.accounts.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Note(*)</b></label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea rows="8" placeholder="Note" class="form-control" name="note" id="noteSettlement"
+                                th:text="${item.note}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Classify(*)</b></label>
+                        </div>
+                        <div class="col-md-9 classifys-container">
+                            <span class="classify-option" th:id="'plus'+ ${item.id}"
+                                th:onclick="selectOption(true, [[${item.id}]])"
+                                th:classappend="${item.classify ? 'active' : ''}">+</span>
+                            <span class="classify-option" th:id="'minus'+ ${item.id}"
+                                th:onclick="selectOption(false, [[${item.id}]])"
+                                th:classappend="${!item.classify ? 'active' : ''}">-</span>
+                            <input type="hidden" th:id="'classifyValue'+ ${item.id}" name="classify"
+                                th:value="${item.classify}" />
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Amount(*)</b></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" name="money_debt" placeholder="Enter amount money"
+                                min="0" th:value="${item.money_debt}"
+                                th:oninput="convertNumberEdit(this.value, [[${item.id}]])">
+                            <div style="color: red;" th:id="'editConvertedText'+${item.id}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Date(*)</b></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="datetime-local" class="form-control" name="date_create"
+                                th:value="${item.date_create}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--  -->

@@ -1,0 +1,48 @@
+<!---set-budget--->
+<div class="modal fade" th:id="'editModal'+${item.id}" tabindex="-1" role="dialog"
+    th:aria-labelledby="'editModalLabel' + ${item.id}" aria-hidden="true" th:fragment="set-budget-popup(item)">
+
+    <form th:action="@{/users/add-budget}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="'editModalLabel'+${item.id}">
+                        Set Budget</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input th:value="${item.id}" type="text" class="form-control" name="id" style="display: none;">
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Name</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input th:value="${item.name}" type="text" class="form-control" name="name" readonly="">
+
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Budget</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input th:value="${item.budget}" type="text" class="form-control" name="budget">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

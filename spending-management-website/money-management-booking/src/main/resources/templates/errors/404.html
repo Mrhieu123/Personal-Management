@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page Not Found</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #2e2e2e;
+            margin-top: 10%;
+        }
+
+        p {
+            font-size: 24px;
+            color: #4d4d4d;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        a {
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>404 - Page Not Found</h1>
+    <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <a sec:authorize="hasRole('ROLE_USER')"th:href="@{/users/dashboard}">Go to homepage</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admins/home}"> Go to homepage</a>
+</body>
+
+</html>

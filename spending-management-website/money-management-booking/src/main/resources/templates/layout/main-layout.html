@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://www.springframework.org/tags"
+    th:fragment="main-fragment(title,otherStaticResource,javascript,mainContent)">
+
+<head th:fragment="header(title)">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/de1d9009fe.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/alert-report.css}">
+
+    <title th:replace="${title}">Dashboard Sidebar Menu</title>
+    <th:block th:replace="${otherStaticResource}">
+
+    </th:block>
+</head>
+
+<body th:onload="report([[${param.report}]])">
+
+    <nav class="main-layout_sidebar main-layout_close">
+        <header>
+            <div class="main-layout_image-text">
+                <span class="main-layout_image">
+                    <img id="main-layout_logo-project" src="/image/logo.jpg" alt="logo">
+                </span>
+                <div class="main-layout_text main-layout_logo-text">
+                    <span class="name">PMM</span>
+                    <span class="profession"></span>
+                </div>
+            </div>
+            <!-- <i class='bx bx-chevron-right toggle'></i> -->
+            <i class="fa-solid fa-angle-right toggle" style="font-size: 13px;"></i>
+        </header>
+
+        <div class="main-layout_menu-bar">
+            <div class="main-layout_menu">
+                <ul class="main-layout_menu-links">
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="main-layout_nav-link">
+                        <a th:href="@{/admins/home}">
+                            <i class='fa-solid fa-crown icon'></i>
+                            <span class="main-layout_text main-layout_nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="main-layout_nav-link">
+                        <a th:href="@{/users/overview}">
+                            <!-- <i class='bx bxs-bar-chart-square icon' ></i> -->
+                            <i class="fa-solid fa-wallet icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Overview</span>
+                        </a>
+                    </li>
+
+                    <li class="main-layout_nav-link">
+                        <a th:href="@{/users/list-budget}">
+                            <i class="fa-solid fa-piggy-bank icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Budget</span>
+                        </a>
+                    </li>
+
+                    <li class="main-layout_nav-link">
+                        <a th:href="@{/users/list-income}">
+                            <i class="fa-solid fa-money-bill icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Income</span>
+                        </a>
+                    </li>
+                    <li class="main-layout_nav-link">
+                        <a th:href="@{/users/list-expenses}">
+                            <i class="fa-solid fa-money-check-dollar icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Expense</span>
+                        </a>
+                    </li>
+
+
+                    <li class="main-layout_nav-link">
+
+                        <a th:href="@{/Debtor/ListAll}">
+                            <i class="fa-solid fa-money-bill-transfer icon"></i>
+
+                            <span class="main-layout_text main-layout_nav-text">Debt</span>
+                        </a>
+                    </li>
+
+                    <li class="main-layout_nav-link">
+                        <a th:href="@{/settings/index}">
+                            <i class="fa-solid fa-gear icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Setting</span>
+                        </a>
+                    </li>
+
+                    <li class="main-layout_nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-circle-info icon"></i>
+                            <span class="main-layout_text main-layout_nav-text">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-layout_bottom-content">
+                <li class="">
+                    <a th:href="@{/logout}">
+                        <i class="fa-solid fa-right-from-bracket icon"></i>
+                        <span class="main-layout_text main-layout_nav-text">Logout</span>
+                    </a>
+                </li>
+                </li>
+            </div>
+        </div>
+    </nav>
+    <div class="main-layout_top-header">
+        <h6> Hi there <span th:text="${session.userFullName}"></span>!
+        </h6>
+        <div class="main-layout_total-money"> 
+            <i class="fa-solid fa-sack-dollar icon" ></i>
+            <p>Total money: </p>
+            <span th:text="' '+${totalMoney}"></span>
+        </div>
+    </div>
+    <section class="main-layout_home" th:insert="${mainContent}">
+
+    </section>
+    <script th:src="@{/assets/javascript/script.js}"></script>
+    <script th:src="@{/assets/javascript/alert-report.js}"></script>
+
+    <th:block th:replace="${javascript}">
+
+    </th:block>
+   
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::main-fragment(
+    ~{::title}, 
+    ~{::#setting-css},
+    ~{::#setting-javascript},
+    ~{::#mainContent})">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Setting Page</title>
+    <th:block id="setting-css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: rgb(210, 205, 199);
+                font-family: Arial, sans-serif;
+            }
+
+            .setting-container {
+                max-width: 500px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        
+            }
+
+            h1 {
+                color: #333333;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .btn-primary {
+                width: 60%;
+                margin-bottom: 15px;
+                color: white !important;
+            }
+
+            .modal-content {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .modal-header {
+                background-color: #007bff;
+                color: #ffffff;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+            .container{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            h1{
+                width: 100%;
+            }
+        
+        </style>
+    </th:block>
+
+</head>
+
+<body>
+    <div id="mainContent">
+        <div class="container mt-5">
+            <h1 class="mb-4">Settings</h1>
+            <a th:href="@{/settings/profile}" class="btn btn-primary mt-3" >
+                Profile
+            </a>
+            <a th:href="@{/settings/category}" class="btn btn-primary mt-3" >
+                Category 
+            </a>
+
+            <a th:href="@{/settings/change-password}" class="btn btn-primary mt-3" >
+                Security
+            </a>
+        </div>
+
+
+
+
+    </div>
+    <th:block id="setting-javascript">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!--add-category-->
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true"
+    th:fragment="add-category-popup(addcategory)">
+
+    <form th:action="@{/settings/add-category}" th:object="${addcategory}" method="post">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add New Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"> <label class=""><b>Name</b>
+                            </label></div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter Name" type="text" class="form-control" th:field="*{name}" required
+                                name="name">
+                        </div>
+                    </div>
+
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3"><label class="">
+                                <b>Type</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select th:field="*{income_or_expense}" required class="form-control">
+                                <option th:value="TRUE" th:text="Income"></option>
+                                <option th:value="FALSE" th:text="Expenses">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-------------------------------------------------------------------------------------->
+<div class="modal fade" th:id="'editModal'+${item.id}" tabindex="-1" role="dialog"
+    th:aria-labelledby="'editModalLabel' + ${item.id}" aria-hidden="true" th:fragment="edit-category-popup(item)">
+    <form th:action="@{/settings/detail-category}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="'editModalLabel'+${item.id}">
+                        Edit Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input th:value="${item.id}" type="text" class="form-control" name="id" style="display: none;">
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class=""><b>Name</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input th:value="${item.name}" type="text" class="form-control" name="name">
+
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <div class="form-label-horizontal col-md-3">
+                            <label class="">
+                                <b>Type</b>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select name="income_or_expense" class="form-control">
+                                <option th:value="TRUE" th:text="Income"
+                                    th:selected="${item.income_or_expense == TRUE}">
+                                </option>
+                                <option th:value="FALSE" th:text="Expenses"
+                                    th:selected="${item.income_or_expense == FALSE}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

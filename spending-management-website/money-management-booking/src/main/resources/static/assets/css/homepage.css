@@ -1,0 +1,442 @@
+body {
+    font-family: monospace;
+    margin: 0;
+    overflow-x: hidden;
+}
+h2 {
+    text-align: center;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ecece785;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    color: black;
+}
+.nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    padding: 10px 10%;
+    border-bottom: 2px solid rgba(115, 114, 114, 0.2);
+    display: flex;
+    align-items: center;
+    color: #eee;
+    z-index: 11111111111111111;
+}
+.nav a{
+    color: #eee;
+}
+.menu{
+    width: 15%;
+}
+.other{
+    width: 85%;   
+    display: flex;
+    justify-content: right;
+    
+}
+.other ul{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    list-style: none;
+    display: inline-block;
+}
+.other li{
+    padding: 25px;
+    display: inline-block;
+    transition: 0.5s;
+    position: relative;
+}
+.otheroption a{
+    text-decoration: none;
+    color: #eee;
+}
+.other li:hover{
+    background-color: seagreen!important;
+}
+.tofixed {
+    position: fixed;
+    top: 0;
+    color: #555;
+    background-color: #ddd;
+    animation: showfixed 1s ease-in-out 1 forwards
+}
+.tofixed a{
+    color: #555;
+}
+
+
+.banner {
+    height: 120vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: brightness(0.5);
+    height: 100%;
+    background-image: url("https://wallpapercave.com/wp/wp5054620.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top left;
+    background-attachment: fixed;
+    z-index: -1;
+    content: '';
+}
+
+.banner .title_1 {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 5vh;
+    opacity: 0;
+    font-family: 'Great Vibes', cursive;
+    animation: showtitle 3s ease-in-out 1s 1 forwards
+}
+
+.banner .title_2 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 5vh;
+    opacity: 0;
+    font-family: 'Great Vibes', cursive;
+    animation: showtitle 3s ease-in-out 1s 1 forwards
+}
+
+.banner .title_3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 5vh;
+    opacity: 0;
+    font-family: 'Great Vibes', cursive;
+    animation: showtitle 3s ease-in-out 1s 1 forwards
+}
+
+.banner .title_4 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 5vh;
+    opacity: 0;
+    font-family: 'Great Vibes', cursive;
+    animation: showtitle 3s ease-in-out 1s 1 forwards
+}
+@keyframes showtitle{
+    from{
+        filter: blur(33px);
+        transform: translate(-50%,-80%);
+    }to{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translate(-50%,-50%);
+    }
+}
+.banner img {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 10%);
+    width: 50%;
+    filter: brightness(0.5);
+    opacity: 0;
+    animation: totopimg ease-in-out 5s 1 forwards;
+}
+.banner::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    top: 110vh;
+    background-image: url(https://livedemo00.template-help.com/wt_prod-20838/images/cloud-2.png);
+    background-size: 100%;
+    content: '';
+    filter: brightness(0.87);
+}
+
+
+
+.container {
+    min-height: 1100px;
+    background-color: #ddd;
+}
+
+.intro {
+    padding: 20px;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro h2 {
+    font-size: 150px;
+    padding: 0;
+    margin: 30px 0;
+    font-family: 'Great Vibes', cursive;
+}
+
+.intro div {
+    font-size: 20px;
+}
+
+.thamgiangay {
+    background-color: forestgreen;
+    color: white;
+    border: solid 2px;
+    outline: none;
+    padding: 10px 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.travel {
+    height: 100vh;
+    width: 80%;
+    padding: 150px 10% 100px 10%;
+    background-color: #cfdadb;
+    text-align: center;
+}
+
+.travel .title {
+    padding-bottom: 100px;
+}
+.travel .list{
+    display: flex;
+}
+.travel .itemImg {
+    width: 20%;
+    padding: 0px 30px;
+}
+
+.travel .itemImg img {
+    width: 90%;
+    padding: 5%;
+    height: 520px;
+    object-fit: cover;
+   
+}
+
+.travel .itemImg img:hover {
+    transform: scale(1.2);
+}
+
+.choose{
+    background-color: rgb(168, 151, 129);
+    padding: 180px 0px 200px 0px;
+}
+.option {
+    margin-left: -40px;
+    display: flex;
+    justify-content: center;
+    padding-left: 50px;
+}
+
+.option img {
+     width: 450px;
+    height: 300px;
+}
+
+.option_name {
+    color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+.option_img {
+    box-shadow: 0 0 10px black;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.option button {
+    background-color: burlywood;
+    color: brown;
+    border: solid 2px;
+    outline: none;
+    padding: 10px 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.option_img img {
+    border-start-end-radius: 20px;
+    border-start-start-radius: 20px;
+}
+
+
+.teacher{
+    background:#5C717F;
+    margin-top: -16px;
+    padding: 150px 0px 100px 0px;
+}
+
+.direction{
+    text-align: center;
+}
+.direction button{
+    font-weight: bold;
+    background-color: #ffffff44;
+    border:none;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    transition: 0.5s;
+    margin:0 10px;
+}
+.direction button:hover{
+    background-color: #ffffff;
+}
+.item_teacher{
+    border-radius: 15px;
+    width:300px;
+    height:500px;
+    background-image: linear-gradient(to top, #6a8294, #ECECF2);
+    overflow: hidden;
+    transition: 0.5s;
+    margin:10px;
+    scroll-snap-align: start;
+}
+.item_teacher .avatar{
+    display: block;
+    margin:50px auto 10px;
+    width:100px;
+    height:150px;
+    object-fit: cover;  
+    border-radius: 20px;
+    box-shadow: 0 10px 15px #7e878d;
+}
+.content_teacher{
+    padding:30px;
+}
+.content_teacher table td{
+    padding:10px 0;
+    border-bottom: 2px solid #616669;
+}
+.content_teacher table td:nth-child(2){
+    text-align: right;
+}
+.nameGroup{
+    text-align: center;
+    border-bottom:none!important;
+}
+#list{
+    display: flex;
+    width:max-content;
+}
+#formList{
+    width:1280px;
+    max-width: 100%;
+    overflow: auto;
+    margin:100px auto 50px;
+    scroll-behavior: smooth;
+    scroll-snap-type: both;
+}
+#formList::-webkit-scrollbar{
+    display: none;
+}
+
+
+.footer {
+    text-align: center;
+    background-color: rgb(104, 99, 98);
+    padding: 30px 0px;
+    margin-bottom: -8px;
+}
+
+.showtotop{
+    opacity: 0;
+}
+
+.active .showtotop {
+    animation: showtop 1s ease-in-out 1 forwards;
+}
+
+
+@keyframes showtop {
+    from {
+        opacity: 0;
+        transform: translate(0, 100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.delay-02 {
+    animation-delay: 0.2s !important;
+}
+.delay-04 {
+    animation-delay: 0.4s !important;
+}
+.delay-06 {
+    animation-delay: 0.6s !important;
+}
+.delay-08 {
+    animation-delay: 0.8s !important;
+}
+.delay-1 {
+    animation-delay: 1s !important;
+}
+.delay-12 {
+    animation-delay: 1.2s !important;
+}
+.delay-14 {
+    animation-delay: 1.4s !important;
+}
+.delay-16 {
+    animation-delay: 1.6s !important;
+}
+.delay-18 {
+    animation-delay: 1.8s !important;
+}
+.delay-2 {
+    animation-delay: 2s !important;
+}
+.delay-12 {
+    animation-delay: 1.2s !important;
+}
+.delay-14 {
+    animation-delay: 1.4s !important;
+}
+.delay-16 {
+    animation-delay: 1.6s !important;
+}
+.delay-18 {
+    animation-delay: 1.8s !important;
+}

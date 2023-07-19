@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::main-fragment(
+    ~{::title}, 
+    ~{::#admin-static-resource},
+    ~{::#admin_javascript},
+    ~{::#mainContent})">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <th:block id="admin-static-resource">
+        <link rel="stylesheet" href="/assets/css/view-debtor.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/3098a9fa7b.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script th:src="@{/assets/javascrip/numtoword.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <style>
+            /* CSS cho dòng chẵn */
+            tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+
+            /* CSS cho dòng lẻ */
+            tr:nth-child(even) {
+                background-color: white;
+            }
+
+
+            .form-control-inline {
+                display: inline-block;
+            }
+
+            .rounded-popup {
+                border-radius: 20px;
+            }
+        </style>
+    </th:block>
+
+    <title>Debtors List</title>
+</head>
+
+<body>
+    <th:block id="mainContent">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    <h3 class="mb-0" th:text="${debtor.name}"></h3>
+                                    <p class="small text-muted m-0"
+                                        th:text="'Total record: ' + ${page.getTotalElements()}">
+                                    </p>
+
+                                </div>
+                                <div class="float-right">
+                                    <a type="button" th:href="@{/Debtor/ListAll}" title="List Debt"
+                                        class="mr-1 btn btn-primary" style="border-radius: 20px;">Back to List of
+                                        Debtor</a>
+                                </div>
+                                <div class="float-right">
+                                    <th:block th:if="${listAcc > 0}">
+                                        <button type="button" class="mr-1 btn btn-primary" data-toggle="modal"
+                                            data-target="#editModal" style="border-radius: 20px;"><i
+                                                class="fa fa-plus"></i>
+                                            Add New Debt
+                                        </button>
+                                        <div th:replace="layout/debt-popup :: add-debt-popup()"></div>
+
+                                    </th:block>
+
+                                    <th:block th:if="${listAcc == 0}">
+                                        <i style="color: red; margin-right: 350px; font-size: 20px;">You need to create
+                                            an account before creating a debt!</i>
+                                    </th:block>
+                                </div>
+
+                                <div class="float-left" style="margin-left: 70px;">
+                                    <i style="color: red; font-size: 21px;" th:text="${errorMessage}"></i>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-right: 50px; margin-top: 10px;">
+                                    <form th:action="@{/Debtor/Detail/Filter}" method="get" id="filterForm">
+                                        <div class="input-group">
+                                            <select id="filterType" name="filterType" class="form-control"
+                                                style="border-radius: 15px; margin-right: 10px; width: 150px;">
+                                                <option value="total" th:selected="${filterType == 'total'}">Total Money
+                                                </option>
+                                                <option value="date" th:selected="${filterType == 'date'}">Date Start
+                                                </option>
+                                            </select>
+                                            <input type="hidden" name="nameDebtor" th:value="${nameDebtor}">
+                                            <div id="filterValueContainer">
+
+                                                <div id="rangeContainer"
+                                                    th:classappend="${filterType == 'date'} ? 'active' : ''">
+                                                    <div class="input-row">
+                                                        <input type="text" id="filterValueStart" name="filterValueStart"
+                                                            class="form-control"
+                                                            style="border-radius: 15px; width: 200px;"
+                                                            placeholder="From" th:value="${filterValueStart}">
+                                                        <span class="separator">-</span>
+                                                        <input type="text" id="filterValueEnd" name="filterValueEnd"
+                                                            class="form-control"
+                                                            style="border-radius: 15px; width: 200px;" placeholder="To"
+                                                            th:value="${filterValueEnd}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="link" th:value="${currentLink}">
+                                            <button type="submit" id="searchButton" class="btn btn-secondary"
+                                                style="border-radius: 15px; margin-left: 10px;">
+                                                <i class="fas fa-search"></i> Filter
+                                            </button>
+                                            <button type="button" id="clearButton" class="btn btn-secondary"
+                                                style="border-radius: 15px; margin-left: 10px;">
+                                                <i class="fas fa-times"></i> Clear Filter
+                                            </button>
+                                        </div>
+                                        <div style="margin-left: 20px;"><span style="color: red;" id="errorSpan"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive" style="text-align: center;">
+                                    <table class="table table-bordered table-sm"
+                                        data-resizable-columns-id="demo-table-v2">
+                                        <thead>
+                                            <tr id="ta" style="background-color: white;color:black;">
+                                                <th class="resizable-column"
+                                                    style="position: relative; width: 64.4375px">ID
+                                                </th>
+                                                <th class="resizable-column">From Account</th>
+                                                <th class="resizable-column">Note</th>
+                                                <th class="resizable-column"
+                                                    style="position: relative; width: 128.25px;">
+                                                    Classify
+                                                </th>
+                                                <th class="resizable-column">Money
+                                                    Debt</th>
+                                                <th class="resizable-column"
+                                                    style="position: relative; width: 175.275px;">
+                                                    Start
+                                                    Date</th>
+                                                <th class="resizable-column"
+                                                    style="position: relative; width: 317.65px;">
+                                                    Action</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item : ${page.content}"
+                                                th:classappend="${item.classify ? 'green-row' : 'red-row'}">
+                                                <td style="font-weight: 499;" th:text="${item.id}"></td>
+                                                <td style="font-weight: 499;" th:text="${item.accounts.name}"></td>
+                                                <td style="font-weight: 499;" th:text="${item.note}"></td>
+                                                <td style="font-weight: 499;" th:text="${item.classify ? '+' : '-'}">
+                                                </td>
+                                                <td style="font-weight: 499;" th:text="${item.money_debt}"></td>
+                                                <td style="font-weight: 499;" th:text="${item.date_create}"></td>
+                                                <td>
+                                                    <div style="margin: auto; text-align:center">
+                                                        <a class="btn btn-warning" data-toggle="modal"
+                                                            th:data-target="'#editModal' + ${item.id}">
+                                                            <i class="fa fa-pencil"></i>
+                                                            Edit
+                                                        </a>
+                                                        <a th:href="@{'/Debtor/Detail/Delete/' + ${item.id}}"
+                                                            th:classappend="${item.classify ? 'disabled' : ''}"
+                                                            onclick="return confirm('Are you sure that the debt has been paid off?');"
+                                                            type="button" class="btn btn-success"><em
+                                                                class="fa fa-plus"></em></a>
+                                                        <a th:href="@{'/Debtor/Detail/Delete/' + ${item.id}}"
+                                                            th:classappend="${item.classify ? '' : 'disabled'}"
+                                                            onclick="return confirm('Are you sure that the debt has been paid off?');"
+                                                            type="button" class="btn btn-danger"><em
+                                                                class="fa fa-minus"></em></a>
+                                                    </div>
+                                                </td>
+
+                                                <div th:replace="layout/debt-popup :: edit-debt-popup(${item})"></div>
+
+                                            </tr>
+                                            <!-- </c:forEach> -->
+                                            <th:block th:if="${page.content.size() < 6}">
+                                                <tr th:each="i : ${#numbers.sequence(1, 6 - page.content.size())}">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </th:block>
+
+                                        </tbody>
+                                    </table>
+
+                                    <!-- phân trang -->
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <div class="pagination">
+                                                <a th:classappend="${page.hasPrevious() ? '' : 'disabled'}"
+                                                    th:href="@{${link}(page=${page.number - 1}, filterType=${filterType}, filterValueStart=${filterValueStart}, filterValueEnd=${filterValueEnd})}"
+                                                    class="btn btn-dangers">Previous</a>
+                                                <span>Page <span th:text="${page.number + 1}"></span> / <span
+                                                        th:text="${page.totalPages}"></span></span>
+                                                <a th:classappend="${page.hasNext() ? '' : 'disabled'}"
+                                                    th:href="@{${link}(page=${page.number + 1}, filterType=${filterType}, filterValueStart=${filterValueStart}, filterValueEnd=${filterValueEnd})}"
+                                                    class="btn btn-dangers">Next</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block id="admin_javascript">
+        <script th:src="@{/assets/javascript/debt.js}"></script>
+    </th:block>
+</body>
+
+</html>

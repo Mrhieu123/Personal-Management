@@ -1,0 +1,230 @@
+:root {
+    --main-text-color: black;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+    font-family:  Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: url("https://wallpapercave.com/wp/wp5054620.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+}
+
+.login_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 92vh;
+}
+
+.login_container {
+    width: 340px;
+    background: #fff;
+    display: flex;
+    border-radius: 16px;
+    padding: 28px 32px;
+    flex-direction: column;
+
+
+}
+
+label {
+    color: var(--main-text-color);
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0 12px 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    color: var(--main-text-color);
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    padding: 0px 0 20px 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+}
+
+.login_input-field .input {
+    height: 44px;
+    width: 88%;
+    color: var(--main-text-color);
+    font-size: 16px;
+    padding: 0 0 0 38px;
+    background: rgba(255, 255, 255, 0.415);
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+  
+}
+
+.login_input-field {
+    margin-bottom: 20px;
+    height: 44px;
+}
+
+i {
+    position: relative;
+    top: -32px;
+    left: 16px;
+    color: var(--main-text-color);
+}
+
+
+::-webkit-input-placeholder {
+    color: var(--main-text-color);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login_submit {
+    border: none;
+    border-radius: 32px;
+    font-size: 20px;
+    height: 44px;
+    outline: none;
+    width: 100%;
+    color: var(--main-text-color);
+    background: #02B875;
+    cursor: pointer;
+    transition: .3s;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login_submit:hover {
+    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2);
+}
+
+.login_two-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--main-text-color);
+    font-size: small;
+    margin-top: 8px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login_one {
+    padding-left: 16px;
+    display: flex;
+}
+
+label a {
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+
+
+
+
+/* Import Google font - Poppins */
+
+
+
+
+/* Import Google font - Poppins */
+
+
+
+.captcha_button button {
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.captcha_button button {
+    background: #826afb;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+.captcha_button.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.capctcha_input-field .input {
+    height: 44px;
+    border: none;
+    color: var(--main-text-color);
+    font-size: 16px;
+    padding: 0 0 0 16px;
+    background: rgba(255, 255, 255, 0.415);
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.capctcha_input-field .inputt {
+
+    height: 44px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 12px;
+    background-image: repeating-linear-gradient(45deg, rgba(86, 98, 176, 0.9) 0px, rgb(239, 32, 208) 10px, rgb(194, 31, 170) 10px, rgb(24, 12, 145) 10px, rgb(40, 68, 206) 20px);
+    outline: none;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+
+
+.captch_box {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+    
+}
+
+.captch_input {
+    
+    flex-grow: 1;
+
+}
+
+.captcha_refresh_button {
+    position: absolute;
+    right: 4px;
+    background: #826afb;
+    padding: 18px;
+    border-radius: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.ti-reload {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    font-size: 20px;
+
+    color: whitesmoke;
+}
+
+
+.captcha_input_box {
+    display: flex;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::main-fragment(
+    ~{::title}, 
+    ~{::#admin-static-resource},
+    ~{::#admin_javascript},
+    ~{::#mainContent})">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Income</title>
+    <th:block id="admin-static-resource">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/assets/css/admin.css}">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/view-debtor.css">
+        <link rel="stylesheet" href="/assets/css/accounts.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </th:block>
+
+</head>
+
+<body>
+    <div id="mainContent" class="box">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h5 class="card-title" style="text-align: center;">Month Income Usage</h5>
+                    </div>
+                    <div class="card-body ">
+                        <canvas id="incomeChart" width="316" height="157"
+                            style="display: block; height: 150px; width: 280px;"></canvas>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    <h3 class="mb-0">Income List </h3>
+
+                                    <p class="small text-muted m-0" th:text="'Total record: ' + ${record}"></p>
+                                </div>
+
+                                <div class="float-right">
+                                    <!-- <a type="button" th:href="@{/users/add-income}" title="List Income"
+                                        class="mr-1 btn btn-primary" style="border-radius: 20px;">Add New Income</a> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#editModal" style="border-radius: 20px;">
+                                        Add New Income
+                                    </button>
+
+                                    <div th:replace="layout/income-popup :: add-income-popup(${addincome})">
+                                    </div>
+                                </div>
+
+                                <div class="mess">
+                                    <i style="color: red; margin-right: 170px;" class="mb-0" th:text="${mess}"></i>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive" style="text-align: center;">
+                                    <table class="table table-bordered table-sm"
+                                        data-resizable-columns-id="demo-table-v2">
+                                        <thead>
+                                            <tr id="ta" style="background-color: white;color:black;">
+                                                <th data-resizable-column-id="title">Title</th>
+                                                <th data-resizable-column-id="category">Category</th>
+                                                <th data-resizable-column-id="account">Account</th>
+                                                <th data-resizable-column-id="amount">Amount</th>
+                                                <th data-resizable-column-id="datetime">DateTime</th>
+                                                <th data-resizable-column-id="action"
+                                                    style="position: relative; width: 317.65px;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item : ${page.content}">
+                                                <td th:text="${item.title}"></td>
+                                                <td th:text="${item.category != null ? item.category.name : ''}"></td>
+                                                <td th:text="${item.accounts != null ? item.accounts.name : ''}"></td>
+                                                <td th:text="${item.amount}"></td>
+                                                <td th:text="${item.incomeDate}"></td>
+                                                <td>
+
+                                                    <div style="margin: auto; text-align:center">
+
+                                                        <a>
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-toggle="modal"
+                                                                th:data-target="'#editModal' + ${item.id}">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Edit
+                                                            </button>
+                                                            <div
+                                                                th:replace="layout/income-popup :: edit-income-popup(${item})">
+                                                            </div>
+                                                        </a>
+
+                                                        <a th:onclick="confirmDeleteIncome([[${item.id}]])"
+                                                            class="btn btn-danger" style="color: black;"><i
+                                                                class="fa fa-exclamation-circle"></i>
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <th:block th:if="${page.content.size() < 6}">
+                                                <tr th:each="i : ${#numbers.sequence(1, 6 - page.content.size())}">
+                                                    <td style="width: 53px; height: 52px;"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </th:block>
+                                            <!-- </c:forEach> -->
+                                        </tbody>
+                                    </table>
+                                    <div class="card-body">
+                                        <div class="pagination">
+                                            <a th:classappend="${page.hasPrevious() ? '' : 'disabled'}"
+                                                th:href="@{/users/list-income(page=${page.number - 1})}"
+                                                class="btn btn-dangers">Previous</a>
+                                            <span>Page <span th:text="${page.number + 1}"></span> / <span
+                                                    th:text="${page.totalPages}"></span></span>
+                                            <a th:classappend="${page.hasNext() ? '' : 'disabled'}"
+                                                th:href="@{/users/list-income(page=${page.number + 1})}"
+                                                class="btn btn-dangers">Next</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block id="admin_javascript">
+        <script th:src="@{/assets/javascript/admin.js}"></script>
+        <script th:src="@{/assets/javascript/account.js}"></script>
+
+        <script th:inline="javascript">
+            // Dữ liệu quy trình expense và budget
+            var income = /*[[${totalIncomeByMonth}]]*/ {};
+            var budget = /*[[${monthlyEarning}]]*/ {};
+
+            // Tính toán phần trăm chi tiêu so với ngân sách
+            var incomePercentage = (income / budget) * 100;
+            var remainingPercentage = 100 - incomePercentage;
+            if (remainingPercentage < 0) {
+                remainingPercentage = 0;
+            }
+
+            // Lấy thẻ canvas và context
+            var canvas = document.getElementById('incomeChart');
+            var ctx = canvas.getContext('2d');
+
+            // Tạo biểu đồ tròn
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Income', 'Remaining'],
+                    datasets: [{
+                        data: [incomePercentage, remainingPercentage],
+                        backgroundColor: ['#FF9F40', '#9966FF']
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Expense vs Budget'
+                    },
+                    responsive: false, // Đặt kích thước biểu đồ phù hợp với kích thước phần tử chứa
+                }
+            });
+        </script>
+    </th:block>
+</body>
+
+</html>

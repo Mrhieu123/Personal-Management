@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Code Verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" th:inline="javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/otp.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/alert-report.css}">
+
+</head>
+
+<body id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form">
+                <form action="">
+                    <h2 class="text-center">OTP Verification</h2>
+                    <div class="alert alert-success text-center" id="otp-message" style="display: none;">
+                        OTP has been sent to your email<br>OTP is only effective for <span id="countdown">60</span>
+                        seconds
+                    </div>
+                    <div class="form-group d-flex">
+                        <input class="form-control" type="number" id="otp" name="otp" placeholder="Enter OTP code" required>
+                        <div class="input-group-append">
+                            <input class="form-control button" id="sendOTP" type="button" value="Send OTP"
+                                th:onclick="startTimer()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control button" type="button" name="check" value="Submit" onclick="confirmOTP()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/assets/javascript/otp.js}"></script>
+
+
+        
+</body>
+
+</html>
